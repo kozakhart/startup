@@ -1,7 +1,7 @@
 # Startup pitch
 # I am making an ecommerce site that I will be able to use for a specific market at a later date.
 # Key features:
-# Login/signup page, account information, create, search, and see listings
+# Login/signup page, account information, create, search, and see listings, messaging between sellers/buyers
 # Why am I making this? (Ebay already exists!)
 # I am making this website because there are a few markets for antique/used items that do have a limited online prescence. I have some contacts that have
 # reached out to me saying that they do not feel that ebay would be the best place to list their product and it is likely to get lost in the ether. 
