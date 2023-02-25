@@ -33,6 +33,13 @@
 }
 
 .item-name{
-    margin-left: 20vw !important;
-
+    margin-left: 12vw !important;
+}
+.description{
+    margin-top: 1vw;
+}
+.purchase-button{
+    width:20vw;
+    margin-left: 5vw;
+    margin-top: 2vw;
 }
