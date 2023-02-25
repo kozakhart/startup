@@ -11,7 +11,13 @@
 .login{
     width: 10vw;
     margin-left: 45vw !important;
-    margin-top: 20vw;
+    margin-top: 15vw;
+}
+
+.profile{
+    width: 30vw;
+    margin-left: 35vw !important;
+    margin-top: 10vw;
 }
 .spacer{
     margin:1vw;
