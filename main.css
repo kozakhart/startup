@@ -1,6 +1,6 @@
 .search{
-    width: 10vw;
-    height: 2vw;
+    margin-top: 1vw;        
+    margin-left: 45vw !important;
 }
 
 .center{
@@ -21,4 +21,18 @@
 }
 .spacer{
     margin:1vw;
+}
+
+.card{
+    margin-top: 1vw;
+    border-radius: 3px;
+    border-width: 3px !important;
+    width: 30vw;
+    margin-left: 35vw !important;
+    height: 30vw !important;
+}
+
+.item-name{
+    margin-left: 20vw !important;
+
 }
