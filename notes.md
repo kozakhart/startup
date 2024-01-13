@@ -1,1 +1,2 @@
 ### much of this isn't too new to me, but something that is really nice about vscode when there is a conflict versus on a server/### terminal is that vs code allows you to accept changes with the gui
+### link to readme.md README.md
