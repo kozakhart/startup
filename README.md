@@ -13,4 +13,8 @@ This website will implement authorization, databases, and websockets in the foll
 3) A websocket will display real-time completed orders on the homepage
 
 ### Images
-![Images](https://www.canva.com/design/DAF6Lh29b04/avZ9tDaxh2spNX3j8pAqEA/view?mode=prototype)
+![Image 1](1.png)
+![Image 2](2.png)
+![Image 3](3.png)
+![Image 4](4.png)
+![Image 5](5.png)
