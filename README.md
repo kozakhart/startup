@@ -18,3 +18,10 @@ This website will implement authorization, databases, and websockets in the foll
 ![Image 3](3.png)
 ![Image 4](4.png)
 ![Image 5](5.png)
+
+### HTML Deliverable
+1) Basic login page, routes to index.html
+2) Home page with navigation to other pages and number of orders filled
+3) Shopping page
+4) About page with information about the site
+5) Account page with personal info, orders, and logout button that redirects to login
