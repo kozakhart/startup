@@ -9,13 +9,17 @@
     <div class="header">
         <h1>WELCOME TO WUNDERBOXES</h1>
     </div>
-    <div>
-        <h2>Login</h2>
-        <form action="index.html" method="post">
-            <input type="text" placeholder="Username" required>
-            <input type="password" placeholder="Password" required>
-            <label><input type="checkbox"> Remember Me</label>
-            <input type="submit" value="Login">
+    <div class="login-container">
+        <form class="login-form" action="index.html" method="post">
+            <div class="form-group">
+                <input type="text" id="username" name="username" placeholder="Username" class="input-btn" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder="Password" class="input-btn" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login">
+            </div>
         </form>
     </div>
     <footer>
