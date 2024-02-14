@@ -1,0 +1,11 @@
+.header {
+    background-color: rgb(170, 89, 146);
+    text-align: center;
+    padding: 10px 0;
+    color: white;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}

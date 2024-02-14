@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#./deployFiles.sh -k C:\\Users\\kozak\\keys\\startup.pem -h wunderboxes.com -s startup
 while getopts k:h:s: flag
 do
     case "${flag}" in
