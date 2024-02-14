@@ -27,6 +27,13 @@
     text-align: center;
 }
 
+.about-container {
+    text-align: center;
+}
+.about-content {
+    max-width: 30vw;
+    margin: 0 auto;
+}
 .form-group input[type="submit"] {
     background-color: #32e0c9;
     border: none;
