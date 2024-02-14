@@ -52,6 +52,30 @@
     box-sizing: border-box; /* Including padding and border in the width */
 }
 
+.nav-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Adjust margin as needed */
+}
+
+nav {
+    background-color: rgb(255, 224, 230);
+    border-radius: 30px;
+    padding: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border-radius: 5px;
+}
+
+nav a:hover {
+    background-color: lightpink;
+}
+
 html, body {
     margin: 0;
     padding: 0;
