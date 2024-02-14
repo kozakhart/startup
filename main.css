@@ -6,7 +6,7 @@
 }
 
 .login-container {
-    margin: 20vh auto 0; /* Center horizontally and add 20vh margin from the top */
+    margin: 20vh auto 0;
     width: 30vw;
     height: 80vh;
 }
@@ -35,15 +35,30 @@
     margin: 0 auto;
 }
 
+.shop-container {
+    display: flex;
+    align-items: center;
+    margin-top: 5vh;
+}
+
+.shop-box {
+    width: 45%;
+}
+
+.shop-box-left {
+    text-align: right;
+    margin-right: 5vw;
+}
+
+.shop-box-right {
+    text-align: left;
+    width: 30%;
+}
+
 .home-container {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.image {
-    max-width: 20%; /* Set the maximum width to fill its container */
-    max-height: 20%; /* Set the maximum height to fill its container */
 }
 
 .home-box1{
@@ -168,4 +183,8 @@ footer {
     text-align: center;
     padding: 10px 0;
     color: white;
+}
+.image {
+    max-width: 20%;
+    max-height: 20%;
 }
