@@ -34,6 +34,39 @@
     max-width: 30vw;
     margin: 0 auto;
 }
+
+.account-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 40px;
+}
+
+.account-content {
+    max-width: 30vw;
+    flex: 1;
+}
+.account-button{
+    margin: 10px 0;
+    background-color: #32e0c9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    padding: 10px 20px;
+    width: 10vw;
+}
+.account-button:hover {
+    background-color: #2cb8a5;
+}
+
 .form-group input[type="submit"] {
     background-color: #32e0c9;
     border: none;
@@ -47,22 +80,21 @@
     transition: background-color 0.3s ease;
 }
 
-/* Button hover effect */
 .form-group input[type="submit"]:hover {
     background-color: #2cb8a5;
 }
 
 .input-btn {
     border-radius: 5px;
-    border: 1px solid #ccc; /* Adding border for input fields */
-    padding: 10px; /* Adding padding for input fields */
-    box-sizing: border-box; /* Including padding and border in the width */
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .nav-container {
     display: flex;
     justify-content: center;
-    margin-top: 20px; /* Adjust margin as needed */
+    margin-top: 20px;
 }
 
 nav {
