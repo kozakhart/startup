@@ -188,3 +188,16 @@ footer {
     max-width: 20%;
     max-height: 20%;
 }
+
+.form-group-js {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-group-js label {
+    flex: 1;
+    margin-right: 10px;
+    text-align: right;
+}
+
