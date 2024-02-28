@@ -22,7 +22,7 @@
     <div class="home-container">
         <div class="home-box1">
             <h1>Wunderboxes</h1>
-            <button class="home-button"><a href="shop.html">Order Now!</a></button>
+            <button class="home-button" onclick="makeOrder()"><a href="shop.html">Order Now!</a></button>
         </div>
         <div class="home-box2">
             <img src="present.webp" class="image">
@@ -30,12 +30,13 @@
             <img src="present.webp" class="image">
             <img src="present.webp" class="image">
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quas accusamus fugiat qui deleniti. Cumque, vitae voluptatem sequi nobis sed harum qui facere quaerat quos reiciendis! Repellat iste nemo sequi.</p>
-            <button class="home-button">5,003 orders and counting! (Live Data)</button>
+            <button class="home-button" ><span id="orderCount"></span> orders and counting! (Live Data)</button>
         </div>
     </div>
     <footer>
         <a href="https://github.com/kozakhart/startup.git">Peter Hart Github Repo</a>
     </footer>
     <script src="user-info.js"></script>
+    <script src="orders.js"></script>
 </body>
 </html>
