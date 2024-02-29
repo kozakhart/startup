@@ -31,4 +31,4 @@ This website will implement authorization, databases, and websockets in the foll
 2) Username is saved on login to localstorage and displayed on pages
 3) Account info can be changed and saved
 4) Orders can be made and are displayed in several different places
-5) Random orders from other people are made and added to total
+5) Random orders from other people are made and added to total. This simulates live data being generated.
