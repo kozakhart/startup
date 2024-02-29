@@ -25,3 +25,10 @@ This website will implement authorization, databases, and websockets in the foll
 3) Shopping page
 4) About page with information about the site
 5) Account page with personal info, orders, and logout button that redirects to login
+
+### Javascript
+1) Javascript alert upon not giving password
+2) Username is saved on login to localstorage and displayed on pages
+3) Account info can be changed and saved
+4) Orders can be made and are displayed in several different places
+5) Random orders from other people are made and added to total
