@@ -55,10 +55,10 @@ function savePersonalInformation() {
 }
 
 function showOrderHistory() {
-    const orderCount = localStorage.getItem("orderCount") || 0;
+    const personalOrderCount = localStorage.getItem("personalOrderCount") || 0;
 
     document.getElementById("accountContent").innerHTML = `
         <h1>Order History</h1>
-        <p>You have placed ${orderCount} orders.</p>
+        <p>You have placed ${personalOrderCount} orders.</p>
     `;
 }
