@@ -18,3 +18,12 @@ app.listen(port, () => {
   
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
+
+apiRouter.get('/orders', (_req, res) => {
+    res.send(scores);
+  });
+  
+apiRouter.post('/orders', (req, res) => {
+    scores = updateOrders(req.body, scores);
+    res.send(scores);
+  });
