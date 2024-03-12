@@ -7,5 +7,14 @@ const port = process.argv.length > 2 ? process.argv[2] : 3000;
 app.use(express.static('public'));
 app.use(express.json());
 
+
+app.use((_req, res) => {
+    res.sendFile('index.html', { root: 'public' });
+  });
+  
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+  });
+  
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
