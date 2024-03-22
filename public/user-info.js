@@ -54,11 +54,40 @@ function savePersonalInformation() {
     alert("Changes to your personal information saved successfully!");
 }
 
-function showOrderHistory() {
-    const personalOrderCount = localStorage.getItem("personalOrderCount") || 0;
+// function showOrderHistory() {
+//     const personalOrderCount = localStorage.getItem("personalOrderCount") || 0;
 
-    document.getElementById("accountContent").innerHTML = `
-        <h1>Order History</h1>
-        <p>You have placed ${personalOrderCount} orders.</p>
-    `;
+//     document.getElementById("accountContent").innerHTML = `
+//         <h1>Order History</h1>
+//         <p>You have placed ${personalOrderCount} orders.</p>
+//     `;
+// }
+
+async function showOrderHistory() {
+    try {
+        const response = await fetch('/api/orders');
+        const orders = await response.json();
+        let ordersHtml = '';
+
+        for (const [i, order] of orders.entries()) {
+            if (i >= 3) break;
+            ordersHtml += `
+                <div class="order">
+                    <h2>Order ${i + 1}</h2>
+                    <p>Customer: ${order.customer}</p>
+                    <p>Product: ${order.product}</p>
+                    <p>Quantity: ${order.quantity}</p>
+                    <p>Date: ${new Date(order.timestamp).toLocaleString()}</p>
+                </div>
+            `;
+        }
+
+        document.getElementById("accountContent").innerHTML = `
+            <h1>Order History</h1>
+            <p>You have placed ${orders.length} orders.</p>
+            ${ordersHtml}
+        `;
+    } catch (error) {
+        console.error('Error fetching orders:', error);
+    }
 }
