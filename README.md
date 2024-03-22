@@ -33,3 +33,10 @@ This website will implement authorization, databases, and websockets in the foll
 4) Orders can be made and are displayed in several different places
 5) Random orders from other people are made and added to total. This simulates live data being generated.
 6) Orders are also separated by personal orders and total orders by all customers.
+
+### Startup Service
+1) Changed app to use Node.js/express
+2) I have the static middleware
+3) Added order endpoint get/post
+4) Called order endpoint get/post
+5) Added third party endpoint to display quotes on about page
