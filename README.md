@@ -40,3 +40,7 @@ This website will implement authorization, databases, and websockets in the foll
 3) Added order endpoint get/post
 4) Called order endpoint get/post
 5) Added third party endpoint to display quotes on about page
+
+### Login
+1) Added auth to index
+2) Added login functionality
