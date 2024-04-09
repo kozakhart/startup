@@ -46,3 +46,5 @@ This website will implement authorization, databases, and websockets in the foll
 2) Added login functionality
 3) Added register function
 4) Added logout function
+5) Users can see orders on order history
+6) Users can make orders
