@@ -7,6 +7,7 @@ const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostna
 const client = new MongoClient(url);
 const db = client.db('startup');
 const userCollection = db.collection('user');
+const orderCollection = db.collection('order');
 
 // This will asynchronously test the connection and exit the process if it fails
 (async function testConnection() {
@@ -40,9 +41,25 @@ async function createUser(email, password) {
   return user;
 }
 
+async function createOrder(order) {
+  await orderCollection.insertOne(order);
+  return order;
+}
+
+async function getTotalOrderCount() {
+  const orders = await orderCollection.find().toArray();
+  return orders.length;
+}
+
+async function getOrdersByUser(user) {
+  return orderCollection.find({ "customer": user }).toArray();
+}
+
 module.exports = {
   getUser,
   getUserByToken,
   createUser,
-
+  createOrder,
+  getTotalOrderCount,
+  getOrdersByUser
 };

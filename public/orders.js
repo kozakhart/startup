@@ -1,21 +1,29 @@
 async function makeOrder() {
   try {
-      const response = await fetch('/api/orders', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-              customer: localStorage.getItem('userName'),
-              product: 'Wunderbox',
-              quantity: 1
-          })
-      });
+    const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            customer: localStorage.getItem('userName'),
+            product: 'Wunderbox',
+            quantity: 1
+        })
+    });
 
-      if (!response.ok) {
-          throw new Error('Failed to make order');
-      }
-      updateTotalOrderCount();
+    if (!response.ok) {
+      console.error('Failed to make order:', response);
+      // To display more detailed error information or response body
+      const errorResponse = await response.text(); // or response.json() if the server responds with JSON
+      console.error('Error response body:', errorResponse);
+    } else {
+      // Handle successful order creation
+      console.log('Order made successfully');
+      // Optionally process and use the response data
+      const responseData = await response.json();
+      console.log('Response data:', responseData);
+    }
   } catch (error) {
       console.error('Error making order:', error);
   }
@@ -44,12 +52,10 @@ function updateTotalOrderCount() {
 async function loadOrders() {
     try {
       const response = await fetch('/api/orders');
-      orders = await response.json();
-    } catch {
-      const ordersText = localStorage.getItem('orders');
-      if (ordersText) {
-        orders = JSON.parse(ordersText);
-      }
+      const orders = await response.json();
+      displayOrders(orders);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
     }
   
     displayOrders(orders);

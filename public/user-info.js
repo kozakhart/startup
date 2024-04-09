@@ -65,8 +65,21 @@ function savePersonalInformation() {
 
 async function showOrderHistory() {
     try {
-        const response = await fetch('/api/orders');
+        // include username in the request
+        // const response = await fetch('/api/orders');
+        const response = await fetch('/api/user/orders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+
+            },
+            body: JSON.stringify({
+                customer: localStorage.getItem('userName'),
+            })
+        });
+
         const orders = await response.json();
+        console.log(orders);
         let ordersHtml = '';
 
         for (const [i, order] of orders.entries()) {
@@ -88,6 +101,10 @@ async function showOrderHistory() {
             ${ordersHtml}
         `;
     } catch (error) {
-        console.error('Error fetching orders:', error);
+        document.getElementById("accountContent").innerHTML = `
+        <h1>Order History</h1>
+        <p>You have placed 0 orders.</p>
+    `;
+        
     }
 }
