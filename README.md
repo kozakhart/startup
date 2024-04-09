@@ -44,3 +44,5 @@ This website will implement authorization, databases, and websockets in the foll
 ### Login
 1) Added auth to index
 2) Added login functionality
+3) Added register function
+4) Added logout function
