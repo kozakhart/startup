@@ -10,7 +10,7 @@ var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 const DB = require('./database.js');
 
-const authCookieName = 'token';
+const authCookieName = 'startup-token';
 
 apiRouter.post('/auth/create', async (req, res) => {
   if (await DB.getUser(req.body.email)) {

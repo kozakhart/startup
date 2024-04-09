@@ -65,3 +65,21 @@ function register() {
         console.error("Error:", error);
     });
 }
+
+function logout() {
+    event.preventDefault();
+    fetch("/api/auth/logout", {
+        method: "DELETE",
+    })
+    .then((response) => {
+        if (response.status === 204) {
+            // redirect to the login page
+            window.location.href = "login.html";
+        } else {
+            alert("Failed to log out");
+        }
+    })
+    .catch((error) => {
+        console.error("Error:", error);
+    });
+}
