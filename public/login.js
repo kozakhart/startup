@@ -1,10 +1,33 @@
 function login() {
-    const nameEl = document.querySelector("#username");
+    event.preventDefault();
+    const nameEl = document.querySelector("#email");
     const passwordEl = document.querySelector("#password");
+
     if (passwordEl.value === ""){
         alert("Please enter your password");
         return;
     }
-    localStorage.setItem("userName", nameEl.value);
-    window.location.href = "play.html";
+
+    fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            email: nameEl.value,
+            password: passwordEl.value,
+        }),
+    })
+    .then((response) => {
+        if (response.status === 200) {
+            // redirect to the home page
+            window.location.href = "home.html";
+            return response.json();
+        } else {
+            alert("Invalid email or password");
+        }
+    })
+    .catch((error) => {
+        console.error("Error:", error);
+    });
   }
