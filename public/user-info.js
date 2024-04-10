@@ -5,14 +5,37 @@ var userNameSpan = document.getElementById("userName");
 if (username) {
     userNameSpan.textContent = username;
 }
+async function getUser() {
+    try {
+        const response = await fetch('/user', {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        const user = await response.json();
+        // Assuming you want to do something with 'user', like logging it or returning it
+        console.log(user); // For demonstration
+        return user; // Optional: Depends on what you want to do with this data
+    } catch (error) {
+        console.error('Error fetching user:', error);
+    }
+}
 
-function showPersonalInformation() {
-    // Retrieve personal information from local storage
-    const name = localStorage.getItem("name") || "John";
-    const username = localStorage.getItem("userName") || "";
-    const address = localStorage.getItem("address") || "1238 N 1234 W, Salt Lake City, UT 84123";
-    const phoneNumber = localStorage.getItem("phoneNumber") || "123-456-7890";
 
+
+async function showPersonalInformation() {
+    // Retrieve personal information from /users endpoint, returns json object
+
+    const response = await getUser();
+    const username = response.email;
+    const name = response.name || '';
+    const address = response.address || '';
+    const phoneNumber = response.phoneNumber || '';
+
+    //const username = localStorage.getItem("userName");
+    
     // Update account content with personal information form
     document.getElementById("accountContent").innerHTML = `
         <h1>Personal Information</h1>
@@ -38,36 +61,45 @@ function showPersonalInformation() {
     `;
 }
 
-function savePersonalInformation() {
-    // Get values from input fields
-    const name = document.getElementById("name").value;
-    const username = document.getElementById("username").value;
-    const address = document.getElementById("address").value;
-    const phoneNumber = document.getElementById("phoneNumber").value;
 
-    // Save personal information to local storage
-    localStorage.setItem("name", name);
-    localStorage.setItem("username", username);
-    localStorage.setItem("address", address);
-    localStorage.setItem("phoneNumber", phoneNumber);
+async function savePersonalInformation() {
+    const name = document.getElementById("name").value || '';
+    const address = document.getElementById("address").value || '';
+    const phoneNumber = document.getElementById("phoneNumber").value || '';
 
-    alert("Changes to your personal information saved successfully!");
+    // Create an object for the body with only non-empty fields
+    let body = {};
+    if (name) body.name = name;
+    if (address) body.address = address;
+    if (phoneNumber) body.phoneNumber = phoneNumber;
+
+    try {
+        const response = await fetch('/user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body) // Use the dynamically created body
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log(result);
+        alert("Changes to your personal information saved successfully!");
+    } catch (error) {
+        console.error('Error saving personal information:', error);
+    }
 }
 
-// function showOrderHistory() {
-//     const personalOrderCount = localStorage.getItem("personalOrderCount") || 0;
-
-//     document.getElementById("accountContent").innerHTML = `
-//         <h1>Order History</h1>
-//         <p>You have placed ${personalOrderCount} orders.</p>
-//     `;
-// }
 
 async function showOrderHistory() {
     try {
         // include username in the request
-        // const response = await fetch('/api/orders');
-        const response = await fetch('/api/user/orders', {
+        // const response = await fetch('/orders');
+        const response = await fetch('/user/orders', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -81,23 +113,24 @@ async function showOrderHistory() {
         const orders = await response.json();
         console.log(orders);
         let ordersHtml = '';
+        // get object id
 
         for (const [i, order] of orders.entries()) {
             if (i >= 3) break;
             ordersHtml += `
-                <div class="order">
-                    <h2>Order ${i + 1}</h2>
+                <div class="order" id="${order._id}">
+                    <h2>Order ${order._id}</h2>
                     <p>Customer: ${order.customer}</p>
                     <p>Product: ${order.product}</p>
                     <p>Quantity: ${order.quantity}</p>
-                    <p>Date: ${new Date(order.timestamp).toLocaleString()}</p>
+                    <button onclick="deleteOrder('${order._id}')">Delete</button>
                 </div>
             `;
         }
 
         document.getElementById("accountContent").innerHTML = `
             <h1>Order History</h1>
-            <p>You have placed ${orders.length} orders.</p>
+            <p>You have placed ${orders.length} orders. Here are your most recent orders.</p>
             ${ordersHtml}
         `;
     } catch (error) {
@@ -107,4 +140,19 @@ async function showOrderHistory() {
     `;
         
     }
+}
+
+async function deleteOrder(orderId){
+    const response = await fetch('/orders', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({orderId})
+    });
+    const data = await response.json();
+    console.log(data);
+    document.getElementById(orderId).remove();
+    console.log(orderId)
+    alert("Order deleted successfully!");
 }

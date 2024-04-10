@@ -22,7 +22,7 @@
     <div class="home-container">
         <div class="home-box1">
             <h1>Wunderboxes</h1>
-            <button class="home-button" onclick="makeOrder()"><a href="shop.html">Order Now!</a></button>
+            <button class="home-button" id="redirect">Order Now!</button>
         </div>
         <div class="home-box2">
             <img src="assets\present.webp" class="image">
@@ -39,5 +39,10 @@
     <script src="user-info.js"></script>
     <script src="orders.js"></script>
     <script src="login.js"></script>
+    <script type="text/javascript">
+        document.getElementById("redirect").onclick = function () {
+            location.href = "shop.html";
+        };
+    </script>
 </body>
 </html>

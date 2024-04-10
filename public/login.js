@@ -8,7 +8,7 @@ function login() {
         return;
     }
 
-    fetch("/api/auth/login", {
+    fetch("/auth/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -43,7 +43,7 @@ function register() {
         return;
     }
 
-    fetch("/api/auth/create", {
+    fetch("/auth/create", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -72,7 +72,7 @@ function logout() {
     event.preventDefault();
     // remove username
     localStorage.removeItem("userName");
-    fetch("/api/auth/logout", {
+    fetch("/auth/logout", {
         method: "DELETE",
     })
     .then((response) => {

@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 const DB = require('./database.js');
-const localStorage = require('localstorage');
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
 const authCookieName = 'token';
@@ -14,7 +14,7 @@ app.use(express.static('public'));
 app.set('trust proxy', true);
 
 var apiRouter = express.Router();
-app.use(`/api`, apiRouter);
+app.use(`/`, apiRouter);
 
 apiRouter.post('/auth/create', async (req, res) => {
   if (await DB.getUser(req.body.email)) {
@@ -53,18 +53,30 @@ apiRouter.delete('/auth/logout', (_req, res) => {
 });
 
 
-
 var secureApiRouter = express.Router();
 apiRouter.use(secureApiRouter);
+//express.static('protected')
 
 secureApiRouter.use(async (req, res, next) => {
-  authToken = req.cookies[authCookieName];
+  const authToken = req.cookies[authCookieName];
   const user = await DB.getUserByToken(authToken);
   if (user) {
     next();
-  } else {
-    res.status(401).send({ msg: 'Unauthorized' });
+    } else {
+      res.redirect('/login.html');
+    }
   }
+);
+
+secureApiRouter.get('/shop.html', (req, res) => {
+  console.log('Serving shop.html');
+  res.sendFile(path.join(__dirname, 'protected', 'shop.html'));
+});
+
+
+secureApiRouter.get('/account.html', (req, res) => {
+  // Assuming your 'protected' folder is at the same level as your 'app.js'
+  res.sendFile(path.join(__dirname, 'protected', 'account.html'));
 });
 
 secureApiRouter.post('/user/orders', async (_req, res) => {
@@ -99,6 +111,45 @@ secureApiRouter.post('/orders', async (req, res) => {
   }
 });
 
+// delete orders on account page
+secureApiRouter.delete('/orders', async (req, res) => {
+  try {
+      const order = await DB.deleteOrder(req.body);
+      console.log(order);
+      if (!order) {
+          // Handle case where order is not successfully deleted
+          return res.status(400).json({ message: 'Order could not be deleted' });
+      }
+      // Successfully deleted order, send it back
+      res.status(200).json(order);
+      
+  } catch (error) {
+      console.error('Failed to delete order:', error);
+      res.status(500).json({ message: 'Failed to delete order' });
+  }
+});
+
+secureApiRouter.get('/user', async (_req, res) => {
+  const authToken = _req.cookies[authCookieName];
+  const user = await DB.getUserByToken(authToken);
+  if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+  }
+  res.status(200).json(user);
+  console.log(user);
+});
+
+secureApiRouter.post('/user', async (_req, res) => {
+  const authToken = _req.cookies[authCookieName];
+  const user = await DB.updateUserByToken(authToken, _req.body);
+  if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+  }
+  res.status(200).json(user);
+  console.log(user);
+}
+);
+
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
@@ -118,3 +169,6 @@ function setAuthCookie(res, authToken) {
     sameSite: 'strict',
   });
 }
+
+// delete orders on account page
+// get user info on account page

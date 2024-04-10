@@ -1,6 +1,6 @@
 async function makeOrder() {
   try {
-    const response = await fetch('/api/orders', {
+    const response = await fetch('/orders', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -22,6 +22,7 @@ async function makeOrder() {
       console.log('Order made successfully');
       // Optionally process and use the response data
       const responseData = await response.json();
+      alert("Order made successfully!");
       console.log('Response data:', responseData);
     }
   } catch (error) {
@@ -51,7 +52,7 @@ function updateTotalOrderCount() {
 
 async function loadOrders() {
     try {
-      const response = await fetch('/api/orders');
+      const response = await fetch('/orders');
       const orders = await response.json();
       displayOrders(orders);
     } catch (error) {
@@ -71,22 +72,40 @@ async function loadOrders() {
         const productTdEl = document.createElement('td');
         const quantityTdEl = document.createElement('td');
         const dateTdEl = document.createElement('td');
-  
+    
         positionTdEl.textContent = i + 1;
         customerTdEl.textContent = order.customer;
         productTdEl.textContent = order.product;
         quantityTdEl.textContent = order.quantity;
         dateTdEl.textContent = order.timestamp;
-  
+    
         const rowEl = document.createElement('tr');
         rowEl.appendChild(positionTdEl);
         rowEl.appendChild(customerTdEl);
         rowEl.appendChild(productTdEl);
         rowEl.appendChild(quantityTdEl);
         rowEl.appendChild(dateTdEl);
-  
+    
+        // Create a new td element for the delete button
+        const deleteTdEl = document.createElement('td');
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        // Add a class for styling if needed
+        deleteButton.className = 'delete-btn';
+        
+        // Event listener for the delete button
+        deleteButton.addEventListener('click', function() {
+            // Remove the row when the button is clicked
+            rowEl.remove();
+            // Optional: Handle any additional cleanup, such as updating the backend or adjusting row indices
+        });
+    
+        deleteTdEl.appendChild(deleteButton);
+        rowEl.appendChild(deleteTdEl);
+    
         tableBodyEl.appendChild(rowEl);
-      }
+    }
+    
     } else {
       tableBodyEl.innerHTML = '<tr><td colSpan=5>No orders yet</td></tr>';
     }

@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const config = require('./dbConfig.json');
-
+const { ObjectId } = require('mongodb');
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
 const db = client.db('startup');
@@ -26,6 +26,10 @@ function getUser(email) {
 function getUserByToken(token) {
   return userCollection.findOne({ token: token });
 }
+// update by token
+function updateUserByToken(token, update) {
+  return userCollection.updateOne({ token: token }, { $set: update });
+}
 
 async function createUser(email, password) {
   // Hash the password before we insert it into the database
@@ -46,6 +50,12 @@ async function createOrder(order) {
   return order;
 }
 
+async function deleteOrder(order) {
+  const filter = { _id: new ObjectId(order.orderId) };
+  const result = await orderCollection.deleteOne(filter);
+  return order;
+}
+
 async function getTotalOrderCount() {
   const orders = await orderCollection.find().toArray();
   return orders.length;
@@ -61,5 +71,7 @@ module.exports = {
   createUser,
   createOrder,
   getTotalOrderCount,
-  getOrdersByUser
+  getOrdersByUser,
+  updateUserByToken,
+  deleteOrder,
 };
