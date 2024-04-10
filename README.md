@@ -48,3 +48,6 @@ This website will implement authorization, databases, and websockets in the foll
 4) Added logout function
 5) Users can see orders on order history
 6) Users can make orders
+7) Can delete orders
+8) User can update information like name and address
+9) User can only access shop and account if logged in
